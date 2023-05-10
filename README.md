@@ -1,3 +1,5 @@
+# Just some personal notes from LFCS certified admin course...
+
 # Linux FS Hierarchy
 
 /**usr**:	it’s like the “program files” on windows, the binaries reside there
