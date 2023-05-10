@@ -1231,7 +1231,7 @@ vim /etc/fstab (add it in this file: /dev/sdc2 swap swap defaults 0 0)
 
 reboot
 
-Encrypted Partition
+## Encrypted Partition
 
 gdisk /dec/sdc (num 3, +1G)
 
@@ -1263,7 +1263,7 @@ vim /etc/crypttab (we specify here the name of the secret device, and the partit
 
 reboot
 
-File Systems
+## File Systems
 
 mkfs
 
@@ -1277,7 +1277,7 @@ mkfs.xfs /dev/sdb2
 
 xfs 
 
-Persist mounts
+## Persist mounts
 
 vim /etc/fstab (here we specify what to mount and where: /dev/sdb1 /ext4 ext4 defaults 0 0)
 
@@ -1313,7 +1313,7 @@ blkid (output shows devices with their UUID)
 
 vim /etc/fstab (instead of mounting /dev/sda5, I will now use LABEL=videos for name)
 
-Systemd mounts
+## Systemd mounts
 
 systemctl cat tmp.mount (check the options)
 
@@ -1357,7 +1357,7 @@ cd /books
 
 mount | grep books
 
-LVM logical volumes
+## LVM logical volumes
 
 gdisk /dev/sdb (p, n for new, default, +500M, Hex code 8e00 for LVM, w, Y)
 
@@ -1387,7 +1387,7 @@ vim /etc/fstab (add here this line: /dev/vgdata/lvdata /mydata btrfs defaults 0 
 
 mount -a
 
-LVM volumes persist
+## LVM volumes persist
 
 lvs
 
@@ -1405,7 +1405,7 @@ mount -a (if we get doesn’t exist, do the following:
 
 `		`mount -a
 
-LVM resize operations
+## LVM resize operations
 
 If you want to resize logical volume, you may need to resize the volume group, and even the physical volume
 
@@ -1435,11 +1435,8 @@ vgs
 
 (we can use the available space of the group now to create logical volumes)
 
-LVM mirrors and stripes
 
-check videos again
-
-LVM Snapshots
+## LVM Snapshots
 
 vgs (if there is not available space we should allocate some)
 
@@ -1459,7 +1456,8 @@ lvs (we should see the root-snap)
 
 mount /dev/centos\_centos/root-snap /mnt
 
-RAID volumes
+
+## RAID volumes
 
 lsblk
 
@@ -1485,7 +1483,7 @@ cat /proc/mdstat
 
 mdadm --details /dev/md0
 
-Recovering from failure
+## Recovering from failure
 
 mdadm --create /dev/md1 --level=5 --raid-disks=3 --spare-devices=1 /dev/sdf /dev/sdg /dev/sdh /dev/sdi
 
@@ -1503,7 +1501,7 @@ mdadm --add /dev/md1 /dev/sdg
 
 mdadm --detail /dev/md1
 
-Quota
+## Quota
 
 Limits space available for users on a fs
 
@@ -1539,7 +1537,7 @@ exit
 
 repquota -aug
 
-Quota on XFS
+## Quota on XFS
 
 mount | grep xfs (we got /dev/mapper/vgdata-lvxfs)
 
@@ -1569,7 +1567,7 @@ dd if=/dev/zero of=/lvxfs/biglinda
 
 exit
 
-SSH service config
+## SSH service config
 
 vim /etc/ssh/sshd\_config (check video again for specifics)
 
@@ -1645,13 +1643,13 @@ exit
 
 ssh -p 2233 localhost (forwards to the remote host)
 
-Web Service config
+## Web Service config
 
 /etc/httpd/conf/httpd.conf (the Apache config)
 
 check the videos again
 
-Config Virtual hosts
+## Config Virtual hosts
 
 vim /etc/hosts (put my own ip follow by account.example.com sales.example.com account sales)
 
@@ -1759,7 +1757,7 @@ systemctl restart httpd
 
 curl <http://sales.example.coms> (if used from the browser, promts for user and pass)
 
-FTP config
+## FTP config
 
 yum install vsftpd
 
@@ -1785,7 +1783,7 @@ cd pub
 
 get file9 (downloads it and copies it to current dir)
 
-DNS Server BIND config
+## DNS Server BIND config
 
 Bind is the most common linux dns server
 
@@ -1811,7 +1809,7 @@ systemctl start unbound
 
 systemctl status unbound
 
-NFS & CIFS File Shares
+## NFS & CIFS File Shares
 
 yum intall nfs-utils
 
@@ -1829,7 +1827,7 @@ showmount -e localhost (shows all mounts, -e means export)
 
 firewall-cmd --add-service nfs (if running firewalld)
 
-Persist NFS share
+## Persist NFS share
 
 Logged in Ubuntu machine
 
@@ -1877,7 +1875,7 @@ firewall-cmd --get-services
 
 firewall-cmd --add-service samba --permanent (adds the service to the peristing config as well as the runtime)
 
-Mounting samba shares
+## Mounting samba shares
 
 On the Ubuntu machine (as client)
 
@@ -1909,7 +1907,7 @@ systemctl enable --now maradb
 
 mysql -u root -p (brings us to the maria prompt)
 
-Simple Database
+## Simple Database
 
 In Maria DB prompt:
 
@@ -1923,11 +1921,8 @@ insert into users(firstname, lastname, birthyear) values(‘Linda’, ‘Thomsen
 
 select \* from users;
 
-Understanding Email Handling
 
-check video again
-
-Config Postfix Server
+## Config Postfix Server
 
 systemctl status postfix
 
@@ -1947,7 +1942,7 @@ systemctl restart postfix
 
 ss -tuna | grep 25
 
-Dovecot as IMAP server
+## Dovecot as IMAP server
 
 yum install dovecot mutt
 
@@ -1993,7 +1988,7 @@ systemctl status squid -l
 
 (if I now try to go to oracle.com with my browser, I should get an error)
 
-KVM
+## KVM
 
 grep vmx /proc/cpuinfo (check if this system is ready for vm)
 
@@ -2009,7 +2004,7 @@ virt-manager (starts a graphical utility, which assists in creating a vm)
 
 `	`check video for the options
 
-Managing KVM
+## Managing KVM
 
 virsh list --all
 
